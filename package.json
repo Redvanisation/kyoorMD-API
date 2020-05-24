@@ -1,0 +1,31 @@
+{
+  "name": "kyoormd-api",
+  "version": "1.0.0",
+  "description": "KyoorMD app API",
+  "main": "index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  },
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Redvanisation/kyoorMD-API.git"
+  },
+  "keywords": [
+    "covid19",
+    "health",
+    "wellness"
+  ],
+  "author": "Redvanisation",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Redvanisation/kyoorMD-API/issues"
+  },
+  "homepage": "https://github.com/Redvanisation/kyoorMD-API#readme"
+}
