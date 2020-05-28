@@ -1,0 +1,35 @@
+Users table
+
+  CREATE TABLE users (
+    id serial PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password_digest VARCHAR NOT NULL,
+    gravatar VARCHAR,
+    admin BOOLEAN DEFAULT FALSE,
+    blogger BOOLEAN DEFAULT TRUE,
+    joined TIMESTAMP NOT NULL
+);
+
+
+////////////////
+
+Posts table
+
+  CREATE TABLE posts (
+    id serial PRIMARY KEY,
+    title VARCHAR NOT NULL,
+    content TEXT NOT NULL,
+    user_id INTEGER REFERENCES users(id)
+);
+
+////////////////
+
+Comments table
+
+  CREATE TABLE comments (
+    id serial PRIMARY KEY,
+    body TEXT NOT NULL,
+    user_id INTEGER REFERENCES users(id),
+    post_id INTEGER REFERENCES posts(id)
+);
