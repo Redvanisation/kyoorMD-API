@@ -7,21 +7,19 @@ const register = require('./controllers/register');
 const auth = require('./controllers/auth');
 const profile = require('./controllers/profile');
 
-const db = require('./users');
 
-// const db = knex({
-//   client: 'pg',
-//   connection: {
-//     // host : '127.0.0.1',
-//     // user : 'redvanisation',
-//     // password : '',
-//     // database : 'test'
-//     connectionString: process.env.DATABASE_URL
-//     // ssl: true,
-//   }
-// });
+const db = knex({
+  client: 'pg',
+  connection: {
+    host : '127.0.0.1',
+    user : 'redvanisation',
+    password : '',
+    database : 'kyoormd'
+    // connectionString: process.env.DATABASE_URL
+    // ssl: true,
+  }
+});
 
-// db.select('*').from('users').then(console.log);
 
 
 const app = express();

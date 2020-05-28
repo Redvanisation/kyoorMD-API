@@ -1,5 +1,5 @@
 const handleRegister = (req, res, db, bcrypt) => {
-  const { username, email, password } = req.body;
+  const { username, email, password, gravatar } = req.body;
   
   if (!username || !email || !password) {
     return res.status(400).json('Invalid form submission');
@@ -8,32 +8,17 @@ const handleRegister = (req, res, db, bcrypt) => {
   bcrypt.genSalt(10, function(err, salt) {
     bcrypt.hash(password, salt, function(err, hash) {
         // Store hash in your password DB.
-        // db('users')
-        //   .returning('*')
-        //   .insert({
-        //     name: name,
-        //     email: email,
-        //     password_digest: hash,
-        //     joined: new Date()
-        //   })
-        //   .then(user => res.json(user[0]))
-        //   .catch((err) => res.status(400).json('Unable to register!'));
-        
-        try {
-          db.push({
-            id: Date.now().toString(),
-            username: req.body.username,
-            email: req.body.email,
-            password: hash,
-            admin: false,
-            blogger: true
+        db('users')
+          .returning('*')
+          .insert({
+            username: username,
+            email: email,
+            password_digest: hash,
+            gravatar: gravatar,
+            joined: new Date()
           })
-          res.json(db[0]);
-      } catch (e){
-        // res.send('Error registring')
-        res.send(e)
-      }
-
+          .then(user => res.json(user[0]))
+          .catch((err) => res.status(400).json('Unable to register!'));
     });
   });
 }
