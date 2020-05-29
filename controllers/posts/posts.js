@@ -29,10 +29,16 @@ const handleWritePost = (req, res, db) => {
 const handleGetPost = (req, res, db) => {
   const { id } = req.params;
 
-  db('posts')
-  .join('comments', 'posts.id', 'comments.post_id')
-  .select('*').where('post_id', id)
-    .then(post => res.json(post))
+  db.select('*').from('posts').where({id})
+    .then(post => {
+      db.select('*').from('comments').where('post_id', id)
+        .then(data => {
+          res.json({
+            post: post,
+            comments: data
+          })
+        })
+    })
     .catch(() => res.status(400).json('Error getting the post!'));
 }
 
