@@ -1,13 +1,13 @@
 Users table
 
-  CREATE TABLE users (
+CREATE TABLE users (
     id serial PRIMARY KEY,
     username VARCHAR(50) NOT NULL,
     email VARCHAR(100) NOT NULL,
     password_digest VARCHAR NOT NULL,
     gravatar VARCHAR,
-    admin BOOLEAN DEFAULT FALSE,
-    blogger BOOLEAN DEFAULT TRUE,
+    admin BOOLEAN DEFAULT FALSE NOT NULL,
+    blogger BOOLEAN DEFAULT TRUE NOT NULL,
     joined TIMESTAMP NOT NULL
 );
 
@@ -16,20 +16,22 @@ Users table
 
 Posts table
 
-  CREATE TABLE posts (
+CREATE TABLE posts (
     id serial PRIMARY KEY,
     title VARCHAR NOT NULL,
     content TEXT NOT NULL,
-    user_id INTEGER REFERENCES users(id)
+    post_created TIMESTAMP NOT NULL,
+    user_id INTEGER REFERENCES users(id) NOT NULL
 );
 
 ////////////////
 
 Comments table
 
-  CREATE TABLE comments (
+CREATE TABLE comments (
     id serial PRIMARY KEY,
     body TEXT NOT NULL,
-    user_id INTEGER REFERENCES users(id),
-    post_id INTEGER REFERENCES posts(id)
+    comment_created TIMESTAMP NOT NULL,
+    user_id INTEGER REFERENCES users(id) NOT NULL,
+    post_id INTEGER REFERENCES posts(id) NOT NULL
 );
