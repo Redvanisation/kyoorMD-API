@@ -1,0 +1,37 @@
+Users table
+
+CREATE TABLE users (
+    id serial PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password_digest VARCHAR NOT NULL,
+    gravatar VARCHAR,
+    admin BOOLEAN DEFAULT FALSE NOT NULL,
+    blogger BOOLEAN DEFAULT TRUE NOT NULL,
+    joined TIMESTAMP NOT NULL
+);
+
+
+////////////////
+
+Posts table
+
+CREATE TABLE posts (
+    id serial PRIMARY KEY,
+    title VARCHAR NOT NULL,
+    content TEXT NOT NULL,
+    post_created TIMESTAMP NOT NULL,
+    user_id INTEGER REFERENCES users(id) NOT NULL
+);
+
+////////////////
+
+Comments table
+
+CREATE TABLE comments (
+    id serial PRIMARY KEY,
+    body TEXT NOT NULL,
+    comment_created TIMESTAMP NOT NULL,
+    user_id INTEGER REFERENCES users(id) NOT NULL,
+    post_id INTEGER REFERENCES posts(id) NOT NULL
+);
