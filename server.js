@@ -2,6 +2,9 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 const cors = require('cors');
 const knex = require('knex');
+const morgan = require('morgan');
+
+
 
 const register = require('./controllers/users/register');
 const auth = require('./controllers/users/auth');
@@ -25,10 +28,12 @@ const db = knex({
 
 
 const app = express();
+app.use(morgan('dev'));
 
-
-app.use(express.urlencoded({extended: false}));
 app.use(cors());
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.get('/', (req, res) => res.send('App working!'));
 app.post('/register', (req, res) => register.handleRegister(req, res, db, bcrypt));
@@ -49,4 +54,4 @@ app.get('/comments', (req, res) => {
 
 
 
-app.listen(process.env.PORT || 3001, () => console.log('App is running on port 3001'));
+app.listen(process.env.PORT || 5000, () => console.log('App is running on port 5000'));
