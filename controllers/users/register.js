@@ -1,5 +1,7 @@
+const gravatar = require('gravatar');
+
 const handleRegister = (req, res, db, bcrypt) => {
-  const { username, email, password, gravatar } = req.body;
+  const { username, email, password } = req.body.values;
   
   if (!username || !email || !password) {
     return res.status(400).json('Invalid form submission');
@@ -14,7 +16,7 @@ const handleRegister = (req, res, db, bcrypt) => {
             username: username,
             email: email,
             password_digest: hash,
-            gravatar: gravatar,
+            gravatar: gravatar.url(email, {s: '100', r: 'x', d: 'retro'}, true),
             joined: new Date()
           })
           .then(user => res.json(user[0]))
