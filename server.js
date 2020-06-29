@@ -42,7 +42,7 @@ app.get('/users/:id', (req, res) => profile.handleGetUser(req, res, db));
 
 app.get('/posts', (req, res) => posts.handlePosts(req, res, db));
 app.get('/posts/:id', (req, res) => posts.handleGetPost(req, res, db));
-app.post('/posts/new', (req, res) => posts.handleWritePost(req, res, db));
+app.post('/posts', (req, res) => posts.handleWritePost(req, res, db));
 
 app.post('/comments/new', (req, res) => comments.handleWriteComment(req, res, db));
 

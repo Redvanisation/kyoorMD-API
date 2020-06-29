@@ -27,17 +27,21 @@ const handleWritePost = (req, res, db) => {
 }
 
 const handleGetPost = (req, res, db) => {
+  // res.json({
+  //   post: post,
+  //   comments: data
+  // })
   const { id } = req.params;
 
   db.select('*').from('posts').where({id})
     .then(post => {
-      db.select('*').from('comments').where('post_id', id)
-        .then(data => {
-          res.json({
-            post: post,
-            comments: data
-          })
+      db('comments').join('users', 'comments.user_id', 'users.id').select('comments.id', 'comments.body', 'comments.comment_created', 'users.id', 'users.username', 'users.email', 'users.gravatar', 'users.blogger').where({'comments.post_id': id})
+      .then(data => {
+        res.json({
+          post: post[0],
+          comments: data
         })
+      });
     })
     .catch(() => res.status(400).json('Error getting the post!'));
 }
