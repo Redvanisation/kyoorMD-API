@@ -20,8 +20,8 @@ CREATE TABLE posts (
     id serial PRIMARY KEY,
     title VARCHAR NOT NULL,
     content TEXT NOT NULL,
-    description VARCHAR NOT NULL;
-    tags VARCHAR NOT NULL;
+    description VARCHAR NOT NULL,
+    tags VARCHAR NOT NULL,
     post_created TIMESTAMP NOT NULL,
     user_id INTEGER REFERENCES users(id) NOT NULL
 );

@@ -8,7 +8,7 @@ const handlePosts = (req, res, db) => {
 
 
 const handleWritePost = (req, res, db) => {
-  const { user_id, title, content } = req.body;
+  const { user_id, title, description, content } = req.body;
 
   if (!user_id || !title || !content) {
     res.status(400).json('Invalid submission!');
@@ -18,6 +18,7 @@ const handleWritePost = (req, res, db) => {
     .returning('*')
     .insert({
       title: title,
+      description: description,
       content: content,
       user_id: user_id,
       post_created: new Date()
