@@ -16,11 +16,11 @@ const comments = require('./controllers/comments/comments');
 const db = knex({
   client: 'pg',
   connection: {
-    host : '127.0.0.1',
-    user : 'redvanisation',
-    password : '',
-    database : 'kyoormd'
-    // connectionString: process.env.DATABASE_URL
+    // host : '127.0.0.1',
+    // user : 'redvanisation',
+    // password : '',
+    // database : 'kyoormd'
+    connectionString: process.env.DATABASE_URL
     // ssl: true,
   }
 });
